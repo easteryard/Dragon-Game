@@ -1,0 +1,6 @@
+C:\Projects\C#\Dragon Game\Dragon Game\bin\Debug\Dragon Game.exe.config
+C:\Projects\C#\Dragon Game\Dragon Game\bin\Debug\Dragon Game.exe
+C:\Projects\C#\Dragon Game\Dragon Game\bin\Debug\Dragon Game.pdb
+C:\Projects\C#\Dragon Game\Dragon Game\obj\Debug\Dragon Game.csprojResolveAssemblyReference.cache
+C:\Projects\C#\Dragon Game\Dragon Game\obj\Debug\Dragon Game.exe
+C:\Projects\C#\Dragon Game\Dragon Game\obj\Debug\Dragon Game.pdb
