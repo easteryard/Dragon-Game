@@ -10,12 +10,18 @@ namespace Dragon_Game
     {
         Boolean slaying = true;
 
+        Random rnd = new Random();
+
+        string name;
+        string ability;
+        int playerDamage;
+        
         int playerHP = 30;
-        int heroicStrike = 3;
-        int mortalStrike = 5;
+        int heroicStrike;
+        int mortalStrike;
 
         int dragonHP = 50;
-        int dragonHit = 3;
+        int dragonHit;
 
         public void startGame()
         {
@@ -36,7 +42,6 @@ namespace Dragon_Game
 
         public void yesAnswer()
         {
-            string name;
 
             Console.WriteLine("\nYou're a brave one! What should I call you?");
             name = Console.ReadLine();
@@ -45,8 +50,10 @@ namespace Dragon_Game
 
             while (slaying == true)
             {
-                string ability;
-                int playerDamage = 0;
+                heroicStrike = rnd.Next(3, 6);
+                mortalStrike = rnd.Next(5, 8);
+
+                dragonHit = rnd.Next(4, 9);
 
                 Console.WriteLine("Do you wish to use Heroic Strike or Mortal Strike?");
                 ability = Console.ReadLine();
