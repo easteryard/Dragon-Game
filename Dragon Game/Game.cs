@@ -28,9 +28,15 @@ namespace Dragon_Game
         int playerHP = 30;
 
         int dragonDamage;
-        int dragonCritDmg;
         int dragonHit;
         int dragonCrit;
+        int dragonSpeHit;
+
+        int dragonAttack;
+        int dragonSpecial;
+
+        int dragonAtkCrit;
+        int dragonSpeCrit;
 
         int dragonHP = 50;
 
@@ -64,19 +70,24 @@ namespace Dragon_Game
             while (slaying == true)
             {
                 heroicStrike = rnd.Next(3, 6);
-                mortalStrike = rnd.Next(5, 8);
+                mortalStrike = rnd.Next(4, 8);
 
                 HSCrit = heroicStrike * 2;
                 MSCrit = mortalStrike * 2;
 
                 playerHit = rnd.Next(10);
-                playerCrit = rnd.Next(4);
+                playerCrit = rnd.Next(5);
 
 
-                dragonDamage = rnd.Next(4, 9);
-                dragonCritDmg = dragonDamage * 2;
+                dragonAttack = rnd.Next(3, 7);
+                dragonSpecial = rnd.Next(4, 9);
+
+                dragonAtkCrit = dragonAttack * 2;
+                dragonSpeCrit = dragonSpecial * 2;
+
                 dragonHit = rnd.Next(4);
                 dragonCrit = rnd.Next(8);
+                dragonSpeHit = rnd.Next(10);
 
                 Console.WriteLine("Do you wish to use Heroic Strike or Mortal Strike?");
                 ability = Console.ReadLine();
@@ -137,7 +148,7 @@ namespace Dragon_Game
 
                     if (dragonHP <= 0)
                     {
-                        Console.WriteLine("You slayed the dragon and took its head as a prize!");
+                        Console.WriteLine("You slayed the dragon and took its head as a prize!\n");
 
                         slaying = false;
                     }
@@ -162,27 +173,48 @@ namespace Dragon_Game
             {
                 if(dragonCrit != 0)
                 {
-                    if (dragonHP > 0)
+                    if (dragonSpeHit != 0)
                     {
-                        playerHP -= dragonDamage;
+                        playerHP -= dragonAttack;
+                        dragonDamage = dragonAttack;
 
                         Console.WriteLine("The dragon hit you for " + dragonDamage + " with its giant claw!");
                         Console.WriteLine("You have " + playerHP + " health left.\n");
+                    }
+                    else
+                    {
+                        playerHP -= dragonSpecial;
+                        dragonDamage = dragonSpecial;
 
-                        if (playerHP <= 0)
-                        {
-                            Console.WriteLine("The dragon devours you!");
-                            slaying = false;
-                        }
+                        Console.WriteLine("The dragon burned you for " + dragonDamage + " with its fiery breath!");
+                        Console.WriteLine("You have " + playerHP + " health left.\n");
                     }
                 }
                 else
                 {
-                    playerHP -= dragonCritDmg;
-                    dragonDamage = dragonCritDmg;
+                    if(dragonSpeHit != 0)
+                    {
+                        playerHP -= dragonAtkCrit;
+                        dragonDamage = dragonAtkCrit;
 
-                    Console.WriteLine("The dragon got a critical hit on you for " + dragonDamage + "!");
-                    Console.WriteLine("You have " + playerHP + " health left.\n");
+                        Console.WriteLine("The dragon got a critical hit on you for " + dragonDamage + "!");
+                        Console.WriteLine("You have " + playerHP + " health left.\n");
+                    }
+                    else
+                    {
+                        playerHP -= dragonSpeCrit;
+                        dragonDamage = dragonSpeCrit;
+
+                        Console.WriteLine("The dragon got a critical hit on you for " + dragonDamage + " with its fiery breath!");
+                        Console.WriteLine("You have " + playerHP + " health left.\n");
+                    }
+                    
+                }
+
+                if (playerHP <= 0)
+                {
+                    Console.WriteLine("The dragon devours you!\n");
+                    slaying = false;
                 }
             }
             else
