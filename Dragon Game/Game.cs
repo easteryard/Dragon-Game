@@ -61,102 +61,20 @@ namespace Dragon_Game
 
         public void yesAnswer()
         {
-
             Console.WriteLine("\nYou're a brave one! What should I call you?");
             name = Console.ReadLine();
-            Console.WriteLine("\nAlright, " + name + ", let's enter the dungeon.\n");
+            Console.WriteLine("\nAlright, " + name + ". As you probably know you have two abilities - Heroic Strike & Mortal Strike." +
+                "\nWhile facing the dragon type 1 for Heroic Strike and 2 for Mortal Strike.");
+
+            Console.WriteLine("\nPress Enter to continue...");
+            Console.ReadLine();
+
+            Console.WriteLine("Let's enter the dungeon.\n");
             Console.WriteLine("We've found the dragon! Take it down and you will be rewarded!\n");
 
             while (slaying == true)
             {
-                heroicStrike = rnd.Next(3, 6);
-                mortalStrike = rnd.Next(4, 8);
-
-                HSCrit = heroicStrike * 2;
-                MSCrit = mortalStrike * 2;
-
-                playerHit = rnd.Next(10);
-                playerCrit = rnd.Next(5);
-
-
-                dragonAttack = rnd.Next(3, 7);
-                dragonSpecial = rnd.Next(4, 9);
-
-                dragonAtkCrit = dragonAttack * 2;
-                dragonSpeCrit = dragonSpecial * 2;
-
-                dragonHit = rnd.Next(4);
-                dragonCrit = rnd.Next(8);
-                dragonSpeHit = rnd.Next(10);
-
-                Console.WriteLine("Do you wish to use Heroic Strike or Mortal Strike?");
-                ability = Console.ReadLine();
-
-                for (int i = 0; i < 1000; i++)
-                {
-                    if (ability == "Heroic Strike" || ability == "Mortal Strike")
-                    {
-                        i = 1000;
-                    }
-                    else
-                    {
-                        Console.WriteLine("\nYou didn't chose one of the two options. Pick again.");
-                        ability = Console.ReadLine();
-                    }
-                }
-
-                if (playerHit != 0)
-                {
-                    if (playerCrit != 0)
-                    {
-                        if (ability == "Heroic Strike")
-                        {
-                            dragonHP -= heroicStrike;
-                            playerDamage = heroicStrike;
-                        }
-                        else if (ability == "Mortal Strike")
-                        {
-                            dragonHP -= mortalStrike;
-                            playerDamage = mortalStrike;
-                        }
-
-                        Console.WriteLine("\nYou hit the dragon for " + playerDamage + " with " + ability + "!");
-                        Console.WriteLine("The dragon has " + dragonHP + " health left.\n");
-
-
-                    }
-                    else
-                    {
-                        if (ability == "Heroic Strike")
-                        {
-                            dragonHP -= HSCrit;
-                            playerDamage = HSCrit;
-
-                            Console.WriteLine("\nYou got a critical hit on the dragon for " + playerDamage + " with " + ability + "!");
-                            Console.WriteLine("The dragon has " + dragonHP + " health left.\n");
-
-                        }
-                        else if (ability == "Mortal Strike")
-                        {
-                            dragonHP -= MSCrit;
-                            playerDamage = MSCrit;
-
-                            Console.WriteLine("\nYou got a critical hit on the dragon for " + playerDamage + " with " + ability + "!");
-                            Console.WriteLine("The dragon has " + dragonHP + " health left.\n");
-                        }
-                    }
-
-                    if (dragonHP <= 0)
-                    {
-                        Console.WriteLine("You slayed the dragon and took its head as a prize!\n");
-
-                        slaying = false;
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("\nYour attack missed the dragon!\n");
-                }
+                startPlayerAttacK();
 
                 if(slaying == true)
                 {
@@ -166,10 +84,109 @@ namespace Dragon_Game
         }
 
 
+        public void startPlayerAttacK()
+        {
+            heroicStrike = rnd.Next(3, 6);
+            mortalStrike = rnd.Next(4, 8);
+
+            HSCrit = heroicStrike * 2;
+            MSCrit = mortalStrike * 2;
+
+            playerHit = rnd.Next(10);
+            playerCrit = rnd.Next(4);
+
+            Console.WriteLine("Do you wish to use Heroic Strike or Mortal Strike?");
+            ability = Console.ReadLine();
+
+            if(ability == "1")
+            {
+                ability = "Heroic Strike";
+            }
+            else if(ability == "2")
+            {
+                ability = "Mortal Strike";
+            }
+
+            for (int i = 0; i < 1000; i++)
+            {
+                if (ability == "Heroic Strike" || ability == "Mortal Strike")
+                {
+                    i = 1000;
+                }
+                else
+                {
+                    Console.WriteLine("\nYou didn't choose one of the two options. Pick again.");
+                    ability = Console.ReadLine();
+                }
+            }
+
+            if (playerHit != 0)
+            {
+                if (playerCrit != 0)
+                {
+                    if (ability == "Heroic Strike")
+                    {
+                        dragonHP -= heroicStrike;
+                        playerDamage = heroicStrike;
+                    }
+                    else if (ability == "Mortal Strike")
+                    {
+                        dragonHP -= mortalStrike;
+                        playerDamage = mortalStrike;
+                    }
+
+                    Console.WriteLine("\nYou hit the dragon for " + playerDamage + " with " + ability + "!");
+                    Console.WriteLine("The dragon has " + dragonHP + " health left.\n");
+                }
+                else
+                {
+                    if (ability == "Heroic Strike")
+                    {
+                        dragonHP -= HSCrit;
+                        playerDamage = HSCrit;
+
+                        Console.WriteLine("\nYou got a critical hit on the dragon for " + playerDamage + " with " + ability + "!");
+                        Console.WriteLine("The dragon has " + dragonHP + " health left.\n");
+
+                    }
+                    else if (ability == "Mortal Strike")
+                    {
+                        dragonHP -= MSCrit;
+                        playerDamage = MSCrit;
+
+                        Console.WriteLine("\nYou got a critical hit on the dragon for " + playerDamage + " with " + ability + "!");
+                        Console.WriteLine("The dragon has " + dragonHP + " health left.\n");
+                    }
+                }
+
+                if (dragonHP <= 0)
+                {
+                    Console.WriteLine("You slayed the dragon and took its head as a prize!\n");
+
+                    slaying = false;
+                }
+            }
+            else
+            {
+                Console.WriteLine("\nYour attack missed the dragon!\n");
+            }
+        }
+
+
 
         public void startDragonAttack()
         {
-            if(dragonHit != 0)
+            dragonAttack = rnd.Next(3, 7);
+            dragonSpecial = rnd.Next(4, 9);
+
+            dragonAtkCrit = dragonAttack * 2;
+            dragonSpeCrit = dragonSpecial * 2;
+
+            dragonHit = rnd.Next(4);
+            dragonCrit = rnd.Next(8);
+            dragonSpeHit = rnd.Next(10);
+
+            if (dragonHit != 0)
             {
                 if(dragonCrit != 0)
                 {
@@ -221,8 +238,6 @@ namespace Dragon_Game
             {
                 Console.WriteLine("The dragon missed you!\n");
             }
-        }
-                
-                
+        }     
     }
 }
